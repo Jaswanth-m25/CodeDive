@@ -7,6 +7,54 @@ import {headers} from "next/headers";
 import { Octokit } from "octokit";
 import prisma from "@/lib/db";
 
+
+export async function getContributionStats(){
+    try{
+        const session=await auth.api.getSession({ headers: await headers() });
+        if (!session?.user) {
+            throw new Error("No session found");
+        }
+        const token = await getGithubToken();
+        const octokit=new Octokit({
+            auth:token
+        });
+        const {data:user}=await octokit.rest.users.getAuthenticated();
+        const username=user.login;
+        const calendar=await fetchUserContribution(token,username);
+if (!calendar) {
+    return {
+        totalContributions: 0,
+        contributions: []
+    };
+}
+const contributions = calendar.weeks.flatMap((week: {
+    contributionDays: {
+        date: string;
+        contributionCount: number;
+    }[];
+}) =>
+    week.contributionDays.map((day: {
+        date: string;
+        contributionCount: number;
+    }) => ({
+        date: day.date,
+        count: day.contributionCount,
+        level: Math.min(Math.floor(day.contributionCount / 3), 4)
+    }))
+);
+    return {
+        contributions,
+        totalContributions:calendar.totalContributions
+    }
+    }
+    catch(error){
+        console.error("Error fetching contribution stats:", error);
+return {
+    totalContributions: 0,
+    contributions: []
+};
+    }
+}
 export async function getDashboardStats(){
     try{
         const session=await auth.api.getSession({ headers: await headers() });

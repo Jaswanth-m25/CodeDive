@@ -68,6 +68,7 @@ return response.user.contributionsCollection.contributionCalendar;
     }
     catch(error)
     {
-
+        console.error("Error fetching user contribution:", error);
+        return null;
     }
 }

@@ -146,3 +146,74 @@ export const deleteWebhook = async (owner: string, repo: string) => {
     return false;
   }
 };
+
+export async function getRepoFileContents(token: string, owner: string, repo: string, path: string = ""): Promise<{ path: string; content: string }[]> {
+    const octokit = new Octokit({ auth: token });
+  const { data: repository } = await octokit.rest.repos.get({
+    owner,
+    repo,
+  });
+    const { data } = await octokit.rest.repos.getContent({
+        owner,
+        repo,
+        path
+    });
+    if(!Array.isArray(data)) {
+        if(data.type === "file" && data.content) {
+            const content = Buffer.from(data.content, 'base64').toString('utf-8');
+            return [{ path: data.path, content }];
+        }
+        return [];
+    }
+    let files: { path: string; content: string }[] = [];
+    for(const item of data) {
+        if(item.type ==="file")
+        {
+            const {data:fileData}=await octokit.rest.repos.getContent({
+                owner,
+                repo,
+                path: item.path
+            });
+            if(!Array.isArray(fileData) && fileData.type === "file" && fileData.content) {
+                if(!item.path.match(/\.(png|jpg|jpeg|gif|svg|ico|pdf|zip|tar\.gz)$/i)) {
+                    const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+                    files.push({ path: item.path, content });
+                }
+            }
+        }
+        else if(item.type === "dir") {
+            const subFiles = await getRepoFileContents(token, owner, repo, item.path);
+            files = files.concat(subFiles);
+        }
+    }
+    return files;
+}
+
+
+export async function testGithubAccess(
+  token: string,
+  owner: string,
+  repo: string
+) {
+  const octokit = new Octokit({
+    auth: token,
+  });
+
+  console.log("OWNER:", owner);
+  console.log("REPO:", repo);
+
+  const { data: user } =
+    await octokit.rest.users.getAuthenticated();
+
+  console.log("AUTHENTICATED USER:", user.login);
+
+  const { data: repository } =
+    await octokit.rest.repos.get({
+      owner,
+      repo,
+    });
+
+  console.log("REPOSITORY FOUND:", repository.full_name);
+
+  return repository;
+}

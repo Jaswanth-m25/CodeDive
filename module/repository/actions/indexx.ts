@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { headers } from "next/headers";
 import { createWebhook, getRepositories } from "@/module/github/lib/github";
+import { inngest } from "@/inngest/client";
 
 interface Repository {
     id: number;
@@ -74,5 +75,20 @@ if (webhook) {
     },
   });
 }
+
+try{
+  await inngest.send({
+    name:"repository.connected",
+    data:{
+      owner,
+      repo,
+      userId: session.user.id
+    }
+  })
+}catch(error)
+{
+console.error("Error sending Inngest event:", error);
+}
+
 return webhook;
 };

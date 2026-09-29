@@ -54,6 +54,7 @@ export const ModelName = {
   Test: 'Test',
   User: 'User',
   Repository: 'Repository',
+  Review: 'Review',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -109,6 +110,21 @@ export const RepositoryScalarFieldEnum = {
 } as const
 
 export type RepositoryScalarFieldEnum = (typeof RepositoryScalarFieldEnum)[keyof typeof RepositoryScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  repositoryId: 'repositoryId',
+  prNumber: 'prNumber',
+  prTitle: 'prTitle',
+  prUrl: 'prUrl',
+  review: 'review',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

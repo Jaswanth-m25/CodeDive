@@ -5,6 +5,7 @@ import prisma from "@/lib/db";
 import { headers } from "next/headers";
 import { createWebhook, getRepositories } from "@/module/github/lib/github";
 import { inngest } from "@/inngest/client";
+import { canConnectRepository,incrementRepositoryCount,decrementRepositoryCount } from "@/module/payment/lib/subscription";
 
 interface Repository {
     id: number;
@@ -60,7 +61,10 @@ export const connectRepository = async (
   if (!session) {
     throw new Error("Unauthorized");
   }
-
+  const canConnect = await canConnectRepository(session.user.id);
+  if (!canConnect) {
+    throw new Error("Repository limit reached. Please upgrade your plan to connect more repositories.");
+  }
   const webhook = await createWebhook(owner, repo);
 
 if (webhook) {
@@ -74,8 +78,8 @@ if (webhook) {
       userId: session.user.id,
     },
   });
-}
 
+  await incrementRepositoryCount(session.user.id);
 try{
   await inngest.send({
     name:"repository.connected",
@@ -89,6 +93,6 @@ try{
 {
 console.error("Error sending Inngest event:", error);
 }
-
+}
 return webhook;
 };

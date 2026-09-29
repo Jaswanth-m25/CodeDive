@@ -84,8 +84,12 @@ Format your response in markdown.`;
             name: repo
         }
       });
-      if (repository) {
-  await prisma.review.create({
+        if (!repository) {
+    throw new Error(
+      `Repository ${owner}/${repo} not found while saving review`
+    );
+  }
+  const savedReview = await prisma.review.create({
     data: {
       repositoryId: repository.id,
       prNumber,
@@ -95,8 +99,13 @@ Format your response in markdown.`;
       status: "completed",
     },
   });
-}
+  return {
+    success: true,
+    reviewId: savedReview.id,
+  };
     });
-return { success: true };
+return {
+  success: true,
+};
   }
 )

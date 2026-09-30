@@ -6,12 +6,7 @@ import {polar,checkout,portal,usage,webhooks} from "@polar-sh/better-auth";
 import { updateUserTier } from "@/module/payment/lib/subscription";
 import { updatePolarCustomerId } from "@/module/payment/lib/subscription";
 import {SubscriptionTier, SubscriptionStatus} from "@/module/payment/lib/subscription";
-console.log(
-  "Polar webhook secret loaded:",
-  process.env.POLAR_WEBHOOK_SECRET
-    ? `YES (${process.env.POLAR_WEBHOOK_SECRET.slice(0, 10)}...)`
-    : "NO"
-);
+
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql", // or "mysql", "sqlite", ...etc

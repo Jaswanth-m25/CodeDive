@@ -2,7 +2,8 @@ import { inngest } from "../client";
 import { getPullRequestDiff } from "@/module/github/lib/github";
 import { retrieveContext } from "@/module/ai/lib/rag";
 import { generateText } from "ai";
-import { google } from "@ai-sdk/google";
+import { ChatGroq } from "@langchain/groq"
+import { groq } from "@ai-sdk/groq";
 import prisma from "@/lib/db";
 import { postReviewComment } from "@/module/github/lib/github";
 
@@ -66,10 +67,10 @@ Please provide:
 7. **Poem**: A short, creative poem summarizing the changes at the very end.
 
 Format your response in markdown.`;
-        const {text}=await generateText({
-            model: google("gemini-3.8-flash"),
-            prompt
-        })
+        const { text } = await generateText({
+   model: groq("openai/gpt-oss-120b"),
+  prompt,
+});
         return text;
     });
     await step.run("post-review", async () => {

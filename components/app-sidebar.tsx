@@ -22,6 +22,12 @@ import {
 } from "@/components/ui/avatar";
 
 import {
+    LayoutDashboard,
+    MessageSquare,
+    CreditCard,
+    Settings
+} from "lucide-react";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -33,21 +39,6 @@ import Logout from "@/module/auth/components/logout";
 
 /* ---------------- ICONS ---------------- */
 
-const DashboardIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <rect x="3" y="3" width="7" height="7" rx="1" />
-    <rect x="14" y="3" width="7" height="7" rx="1" />
-    <rect x="3" y="14" width="7" height="7" rx="1" />
-    <rect x="14" y="14" width="7" height="7" rx="1" />
-  </svg>
-);
 
 const GithubIcon = () => (
   <svg
@@ -60,19 +51,7 @@ const GithubIcon = () => (
   </svg>
 );
 
-const SettingsIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <circle cx="12" cy="12" r="3" />
-    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.42 1.42-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-2v-.48a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.42-1.42.06-.06A1.7 1.7 0 0 0 9.4 15a1.7 1.7 0 0 0-1.56-1.03H7v-2h.84A1.7 1.7 0 0 0 9.4 10a1.7 1.7 0 0 0-.34-1.88L9 8.06l1.42-1.42.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.03-1.56V5h2v.48a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.42 1.42-.06.06A1.7 1.7 0 0 0 19.4 10a1.7 1.7 0 0 0 1.56 1.03H21v2h-.04A1.7 1.7 0 0 0 19.4 15Z" />
-  </svg>
-);
+
 
 const SunIcon = () => (
   <svg
@@ -113,7 +92,7 @@ export const AppSidebar = () => {
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: DashboardIcon,
+      icon: LayoutDashboard,
     },
     {
       title: "Repository",
@@ -123,17 +102,17 @@ export const AppSidebar = () => {
     {
       title: "Reviews",
       url: "/dashboard/reviews",
-      icon: DashboardIcon,
+      icon: MessageSquare,
     },
     {
       title: "Subscription",
       url: "/dashboard/subscription",
-      icon: DashboardIcon,
+      icon:CreditCard,
     },
     {
       title: "Settings",
       url: "/dashboard/settings",
-      icon: SettingsIcon,
+      icon: Settings,
     },
   ];
 
@@ -269,69 +248,69 @@ if (!session) {
   </div>
 </DropdownMenuTrigger>
 
-              <DropdownMenuContent
-                side="top"
-                align="start"
-                sideOffset={8}
-                className="w-72 rounded-lg border bg-white p-2 shadow-lg"
-              >
-                {/* USER */}
-                <div className="flex items-center gap-3 border-b px-3 py-3">
-                  <Avatar className="h-10 w-10">
-                    <AvatarImage
-                      src={userAvatar || "/placeholder.svg"}
-                      alt={userName}
-                    />
-
-                    <AvatarFallback>
-                      {userInitials}
-                    </AvatarFallback>
-                  </Avatar>
-
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">
-                      {userName}
-                    </p>
-
-                    <p className="truncate text-xs text-gray-500">
-                      {userEmail}
-                    </p>
-                  </div>
-                </div>
-
-                {/* THEME */}
-<DropdownMenuItem
-  className="mt-1"
-  render={
-    <button
-      type="button"
-      className="flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-3"
-    />
-  }
-  onClick={() =>
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
+<DropdownMenuContent
+  side="top"
+  align="start"
+  sideOffset={8}
+  className="w-72 rounded-lg border border-gray-200 bg-white p-2 text-gray-900 shadow-lg"
 >
-  {theme === "dark" ? (
-    <>
-      <SunIcon />
-      <span>Light Mode</span>
-    </>
-  ) : (
-    <>
-      <MoonIcon />
-      <span>Dark Mode</span>
-    </>
-  )}
-</DropdownMenuItem>
- 
-                {/* LOGOUT */}
-<DropdownMenuItem>
-  <Logout className="flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-3">
-    Sign Out
-  </Logout>
-</DropdownMenuItem>
-              </DropdownMenuContent>
+  {/* USER */}
+  <div className="flex items-center gap-3 border-b border-gray-200 px-3 py-3">
+    <Avatar className="h-10 w-10">
+      <AvatarImage
+        src={userAvatar || "/placeholder.svg"}
+        alt={userName}
+      />
+
+      <AvatarFallback className="bg-gray-200 text-gray-900">
+        {userInitials}
+      </AvatarFallback>
+    </Avatar>
+
+    <div className="min-w-0">
+      <p className="truncate text-sm font-medium text-gray-900">
+        {userName}
+      </p>
+
+      <p className="truncate text-xs text-gray-600">
+        {userEmail}
+      </p>
+    </div>
+  </div>
+
+  {/* THEME */}
+  <DropdownMenuItem
+    className="mt-1 text-gray-800 focus:bg-gray-100 focus:text-gray-900"
+    render={
+      <button
+        type="button"
+        className="flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-3 text-gray-800"
+      />
+    }
+    onClick={() =>
+      setTheme(theme === "dark" ? "light" : "dark")
+    }
+  >
+    {theme === "dark" ? (
+      <>
+        <SunIcon />
+        <span>Light Mode</span>
+      </>
+    ) : (
+      <>
+        <MoonIcon />
+        <span>Dark Mode</span>
+      </>
+    )}
+  </DropdownMenuItem>
+
+  {/* LOGOUT */}
+  <DropdownMenuItem className="text-gray-800 focus:bg-gray-100 focus:text-gray-900">
+    <Logout className="flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-3 text-gray-800">
+      Sign Out
+    </Logout>
+  </DropdownMenuItem>
+</DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>

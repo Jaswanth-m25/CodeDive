@@ -20,109 +20,227 @@ const LoginUI = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col md:flex-row">
-      {/* LEFT SIDE */}
-      <div className="w-full md:w-1/2 min-h-[45vh] md:min-h-screen flex flex-col justify-between px-8 py-8 md:px-12 lg:px-16">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[#f4e7c5] flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-black" />
-          </div>
+    <div className="min-h-screen bg-[#090909] text-white overflow-hidden">
 
-          <span className="text-xl font-semibold tracking-tight">
-            CodePro
-          </span>
-        </div>
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#f4e7c5]/[0.035] blur-[140px]" />
 
-        {/* Main Text */}
-        <div className="max-w-xl mt-16 md:mt-0">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-            Cut Code Review
-            <br />
-            Time & Bugs in
-            <br />
-            Half.
-            <br />
-            Instantly.
-          </h1>
+        <div className="absolute -bottom-40 right-0 h-[450px] w-[450px] rounded-full bg-[#f4e7c5]/[0.025] blur-[130px]" />
 
-          <p className="mt-8 text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-            Supercharge your team to ship faster with the most advanced AI
-            code reviews.
-          </p>
-        </div>
-
-        {/* Empty bottom space to match design */}
-        <div />
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="w-full md:w-1/2 min-h-[55vh] md:min-h-screen flex items-center justify-center px-8 py-12 md:px-12 lg:px-20">
-        <div className="w-full max-w-md">
-          {/* Heading */}
-          <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              Welcome Back
-            </h2>
+      <div className="relative min-h-screen flex flex-col">
 
-            <p className="mt-4 text-gray-400 text-base">
-              Login using the following providers:
-            </p>
+        {/* HEADER */}
+        <header className="flex items-center justify-between px-7 py-7 sm:px-10 lg:px-14">
+
+          <div className="flex items-center gap-3">
+
+            {/* <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4e7c5]">
+              <div className="h-3 w-3 rounded-full bg-[#090909]" />
+            </div> */}
+
+            <span className="text-[2.15rem] font-black tracking-[-0.065em] leading-none">
+  <span className="text-white">Code</span>
+  <span className="text-[#f4e7c5]">Dive</span>
+</span>
+
           </div>
 
-          {/* GitHub Button */}
-          <button
-            onClick={handleGithubSignIn}
-            disabled={isLoading}
-            className="w-full h-16 rounded-lg bg-white text-black flex items-center justify-center gap-4 text-lg font-medium transition-all duration-200 hover:bg-gray-200 disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            <svg
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="currentColor"
-  aria-hidden="true"
->
-  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.071 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.701 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.579.688.481A10.019 10.019 0 0 0 22 12.017C22 6.484 17.523 2 12 2Z"
-  />
-</svg>
-
-            <span>
-              {isLoading ? "Connecting..." : "GitHub"}
-            </span>
-          </button>
-
-          {/* Sign Up */}
-          <p className="text-center mt-10 text-gray-400">
-            New to CodePro?{" "}
-            <button className="text-[#f4e7c5] font-semibold hover:underline">
-              Sign Up
-            </button>
-          </p>
-
-          {/* Self Hosted */}
-          <div className="text-center mt-5">
-            <button className="text-[#f4e7c5] font-semibold hover:underline">
-              Self-Hosted Services
-            </button>
+          <div className="hidden sm:block text-xs tracking-[0.2em] text-[#6b7280] uppercase">
+            AI Code Review
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-gray-800 mt-16 pt-10">
-            <div className="flex items-center justify-center gap-5 text-sm text-gray-500">
-              <button className="hover:text-gray-300 transition-colors">
-                Terms of Use
-              </button>
+        </header>
 
-              <span>and</span>
+        {/* MAIN */}
+        <main className="flex flex-1 items-center px-7 pb-10 sm:px-10 lg:px-14">
 
-              <button className="hover:text-gray-300 transition-colors">
-                Privacy Policy
-              </button>
-            </div>
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+
+            {/* LEFT */}
+            <section className="max-w-3xl">
+
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#2b2b2b] bg-[#111111]/80 px-3.5 py-2 text-xs font-medium text-[#9ca3af] backdrop-blur">
+
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4e7c5]" />
+
+                AI-POWERED CODE REVIEWS
+
+              </div>
+
+              <h1 className="text-[3.4rem] font-bold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[5.6rem]">
+
+                Review Code Smarter
+                <br />
+
+                Fix Issues Faster
+                <br />
+
+                <span className="text-[#f4e7c5]">
+                  Build Better
+                </span>
+
+                {/* <span className="text-[#6b7280]">
+                  {" "}Build Better.
+                </span> */}
+
+              </h1>
+
+              <p className="mt-8 max-w-xl text-base leading-7 text-[#8d949e] sm:text-lg">
+
+                Supercharge your development workflow with intelligent
+                AI-powered code reviews that help you find bugs, security
+                issues, and improvements before they reach production.
+
+              </p>
+
+              {/* Small feature indicators */}
+              <div className="mt-10 flex flex-wrap gap-3">
+
+                <div className="rounded-lg border border-[#252525] bg-[#101010] px-4 py-3 text-sm text-[#a1a1aa]">
+                  Automated Reviews
+                </div>
+
+                <div className="rounded-lg border border-[#252525] bg-[#101010] px-4 py-3 text-sm text-[#a1a1aa]">
+                  GitHub Integration
+                </div>
+
+                <div className="rounded-lg border border-[#252525] bg-[#101010] px-4 py-3 text-sm text-[#a1a1aa]">
+                  AI Analysis
+                </div>
+
+              </div>
+
+            </section>
+
+            {/* RIGHT */}
+            <section className="flex justify-center lg:justify-end">
+
+              <div className="w-full max-w-[430px]">
+
+                {/* LOGIN CARD */}
+                <div className="rounded-2xl border border-[#292929] bg-[#111111]/95 p-7 shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-9">
+
+                  {/* Card heading */}
+                  <div className="mb-8">
+
+                    <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#6b7280]">
+                      Welcome back
+                    </p>
+
+                    <h2 className="text-3xl font-semibold tracking-[-0.03em]">
+                      Sign in to CodePro
+                    </h2>
+
+                    <p className="mt-3 text-sm leading-6 text-[#7d8490]">
+                      Connect your GitHub account to continue.
+                    </p>
+
+                  </div>
+
+                  {/* GitHub Button */}
+                  <button
+                    onClick={handleGithubSignIn}
+                    disabled={isLoading}
+                    className="
+                      group
+                      flex
+                      h-14
+                      w-full
+                      items-center
+                      justify-center
+                      gap-3
+                      rounded-xl
+                      bg-[#f4e7c5]
+                      text-[#111111]
+                      text-base
+                      font-semibold
+                      transition-all
+                      duration-200
+                      hover:bg-[#fff1c9]
+                      hover:-translate-y-0.5
+                      hover:shadow-[0_10px_35px_rgba(244,231,197,0.12)]
+                      active:translate-y-0
+                      disabled:cursor-not-allowed
+                      disabled:opacity-60
+                    "
+                  >
+
+                    <svg
+                      width="21"
+                      height="21"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.071 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.701 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.579.688.481A10.019 10.019 0 0 0 22 12.017C22 6.484 17.523 2 12 2Z" />
+                    </svg>
+
+                    <span>
+                      {isLoading ? "Connecting..." : "Continue with GitHub"}
+                    </span>
+
+                  </button>
+
+                  {/* Sign Up */}
+                  <p className="mt-7 text-center text-sm text-[#777f8b]">
+
+                    New to CodePro?{" "}
+
+                    <button className="font-semibold text-[#f4e7c5] transition-colors hover:text-[#fff1c9] hover:underline underline-offset-4">
+                      Sign Up
+                    </button>
+
+                  </p>
+
+                  {/* Self Hosted */}
+                  <div className="mt-4 text-center">
+
+                    <button className="text-sm font-medium text-[#777f8b] transition-colors hover:text-white">
+                      Self-Hosted Services
+                    </button>
+
+                  </div>
+
+                </div>
+
+                {/* Footer */}
+                <div className="mt-7 flex items-center justify-center gap-4 text-xs text-[#555b64]">
+
+                  <button className="transition-colors hover:text-[#9ca3af]">
+                    Terms of Use
+                  </button>
+
+                  <span className="text-[#33363b]">
+                    •
+                  </span>
+
+                  <button className="transition-colors hover:text-[#9ca3af]">
+                    Privacy Policy
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
           </div>
-        </div>
+
+        </main>
+
       </div>
+
     </div>
   );
 };

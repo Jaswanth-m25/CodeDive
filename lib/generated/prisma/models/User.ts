@@ -34,6 +34,8 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   subscriptionTier: string | null
   subscriptionStatus: string | null
+  polarCustomerId: string | null
+  polarSubscriptionId: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -46,6 +48,8 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   subscriptionTier: string | null
   subscriptionStatus: string | null
+  polarCustomerId: string | null
+  polarSubscriptionId: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -58,6 +62,8 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   subscriptionTier: number
   subscriptionStatus: number
+  polarCustomerId: number
+  polarSubscriptionId: number
   _all: number
 }
 
@@ -72,6 +78,8 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   subscriptionTier?: true
   subscriptionStatus?: true
+  polarCustomerId?: true
+  polarSubscriptionId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -84,6 +92,8 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   subscriptionTier?: true
   subscriptionStatus?: true
+  polarCustomerId?: true
+  polarSubscriptionId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -96,6 +106,8 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   subscriptionTier?: true
   subscriptionStatus?: true
+  polarCustomerId?: true
+  polarSubscriptionId?: true
   _all?: true
 }
 
@@ -181,6 +193,8 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   subscriptionTier: string
   subscriptionStatus: string | null
+  polarCustomerId: string | null
+  polarSubscriptionId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -214,6 +228,8 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   subscriptionTier?: Prisma.StringFilter<"User"> | string
   subscriptionStatus?: Prisma.StringNullableFilter<"User"> | string | null
+  polarCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
+  polarSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   repositories?: Prisma.RepositoryListRelationFilter
@@ -230,6 +246,8 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   subscriptionTier?: Prisma.SortOrder
   subscriptionStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  polarCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  polarSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   repositories?: Prisma.RepositoryOrderByRelationAggregateInput
@@ -239,6 +257,8 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  polarCustomerId?: string
+  polarSubscriptionId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -253,7 +273,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accounts?: Prisma.AccountListRelationFilter
   repositories?: Prisma.RepositoryListRelationFilter
   usuage?: Prisma.XOR<Prisma.UserUsageNullableScalarRelationFilter, Prisma.UserUsageWhereInput> | null
-}, "id" | "email">
+}, "id" | "polarCustomerId" | "polarSubscriptionId" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -265,6 +285,8 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   subscriptionTier?: Prisma.SortOrder
   subscriptionStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  polarCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  polarSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -283,6 +305,8 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   subscriptionTier?: Prisma.StringWithAggregatesFilter<"User"> | string
   subscriptionStatus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  polarCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  polarSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -295,6 +319,8 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryCreateNestedManyWithoutUserInput
@@ -311,6 +337,8 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryUncheckedCreateNestedManyWithoutUserInput
@@ -327,6 +355,8 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUpdateManyWithoutUserNestedInput
@@ -343,6 +373,8 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUncheckedUpdateManyWithoutUserNestedInput
@@ -359,6 +391,8 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -371,6 +405,8 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -383,6 +419,8 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -395,6 +433,8 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   subscriptionTier?: Prisma.SortOrder
   subscriptionStatus?: Prisma.SortOrder
+  polarCustomerId?: Prisma.SortOrder
+  polarSubscriptionId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -407,6 +447,8 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   subscriptionTier?: Prisma.SortOrder
   subscriptionStatus?: Prisma.SortOrder
+  polarCustomerId?: Prisma.SortOrder
+  polarSubscriptionId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -419,6 +461,8 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   subscriptionTier?: Prisma.SortOrder
   subscriptionStatus?: Prisma.SortOrder
+  polarCustomerId?: Prisma.SortOrder
+  polarSubscriptionId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -504,6 +548,8 @@ export type UserCreateWithoutRepositoriesInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageCreateNestedOneWithoutUserInput
@@ -519,6 +565,8 @@ export type UserUncheckedCreateWithoutRepositoriesInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageUncheckedCreateNestedOneWithoutUserInput
@@ -550,6 +598,8 @@ export type UserUpdateWithoutRepositoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUpdateOneWithoutUserNestedInput
@@ -565,6 +615,8 @@ export type UserUncheckedUpdateWithoutRepositoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUncheckedUpdateOneWithoutUserNestedInput
@@ -580,6 +632,8 @@ export type UserCreateWithoutUsuageInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryCreateNestedManyWithoutUserInput
@@ -595,6 +649,8 @@ export type UserUncheckedCreateWithoutUsuageInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryUncheckedCreateNestedManyWithoutUserInput
@@ -626,6 +682,8 @@ export type UserUpdateWithoutUsuageInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUpdateManyWithoutUserNestedInput
@@ -641,6 +699,8 @@ export type UserUncheckedUpdateWithoutUsuageInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUncheckedUpdateManyWithoutUserNestedInput
@@ -656,6 +716,8 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageCreateNestedOneWithoutUserInput
@@ -671,6 +733,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryUncheckedCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageUncheckedCreateNestedOneWithoutUserInput
@@ -702,6 +766,8 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUpdateOneWithoutUserNestedInput
@@ -717,6 +783,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUncheckedUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUncheckedUpdateOneWithoutUserNestedInput
@@ -732,6 +800,8 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageCreateNestedOneWithoutUserInput
@@ -747,6 +817,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   subscriptionTier?: string
   subscriptionStatus?: string | null
+  polarCustomerId?: string | null
+  polarSubscriptionId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   repositories?: Prisma.RepositoryUncheckedCreateNestedManyWithoutUserInput
   usuage?: Prisma.UserUsageUncheckedCreateNestedOneWithoutUserInput
@@ -778,6 +850,8 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUpdateOneWithoutUserNestedInput
@@ -793,6 +867,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptionTier?: Prisma.StringFieldUpdateOperationsInput | string
   subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  polarSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   repositories?: Prisma.RepositoryUncheckedUpdateManyWithoutUserNestedInput
   usuage?: Prisma.UserUsageUncheckedUpdateOneWithoutUserNestedInput
@@ -857,6 +933,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   subscriptionTier?: boolean
   subscriptionStatus?: boolean
+  polarCustomerId?: boolean
+  polarSubscriptionId?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   repositories?: boolean | Prisma.User$repositoriesArgs<ExtArgs>
@@ -874,6 +952,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   subscriptionTier?: boolean
   subscriptionStatus?: boolean
+  polarCustomerId?: boolean
+  polarSubscriptionId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -886,6 +966,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   subscriptionTier?: boolean
   subscriptionStatus?: boolean
+  polarCustomerId?: boolean
+  polarSubscriptionId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -898,9 +980,11 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   subscriptionTier?: boolean
   subscriptionStatus?: boolean
+  polarCustomerId?: boolean
+  polarSubscriptionId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "subscriptionTier" | "subscriptionStatus", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "subscriptionTier" | "subscriptionStatus" | "polarCustomerId" | "polarSubscriptionId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -929,6 +1013,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     subscriptionTier: string
     subscriptionStatus: string | null
+    polarCustomerId: string | null
+    polarSubscriptionId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1365,6 +1451,8 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly subscriptionTier: Prisma.FieldRef<"User", 'String'>
   readonly subscriptionStatus: Prisma.FieldRef<"User", 'String'>
+  readonly polarCustomerId: Prisma.FieldRef<"User", 'String'>
+  readonly polarSubscriptionId: Prisma.FieldRef<"User", 'String'>
 }
     
 

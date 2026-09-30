@@ -94,7 +94,7 @@ const LoginUI = () => {
 
           {/* Sign Up */}
           <p className="text-center mt-10 text-gray-400">
-            New to CodeRabbit?{" "}
+            New to CodePro?{" "}
             <button className="text-[#f4e7c5] font-semibold hover:underline">
               Sign Up
             </button>

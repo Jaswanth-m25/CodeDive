@@ -18,7 +18,7 @@ export const auth = betterAuth({
             scope:["repo"]
         }
     },
-    trustedOrigins:["http://localhost:3000","https://augmented-subway-kissable.ngrok-free.dev"],
+    trustedOrigins:["http://localhost:3000","https://augmented-subway-kissable.ngrok-free.dev","https://code-dive.vercel.app"],
     plugins:[
         polar({
             client: polarClient,
@@ -28,14 +28,14 @@ export const auth = betterAuth({
                     products: [
                         {
                             productId: "75f04678-1930-4f10-84ce-cbafdbd24ec3",
-                            slug: "codepro" // Custom slug for easy reference in Checkout URL, e.g. /checkout/codepro
+                            slug: "codepro" // Custom slug for easy reference in Checkout URL, e.g. /checkout/codeDive
                         }
                     ],
                     successUrl: process.env.POLAR_SUCCESS_URL || "/dashboard/subscription?success=true",
                     authenticatedUsersOnly: true
                 }),
                 portal({
-                    returnUrl: process.env.NEXT_PUBLIC_APP_URL|| "http://localhost:3000/dashboard",
+                    returnUrl: process.env.NEXT_PUBLIC_APP_URL|| "http://localhost:3000/dashboard" || "https://code-dive.vercel.app/dashboard",
                 }),
                 usage(),
 

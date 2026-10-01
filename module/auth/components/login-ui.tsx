@@ -139,7 +139,7 @@ const LoginUI = () => {
                     </p>
 
                     <h2 className="text-3xl font-semibold tracking-[-0.03em]">
-                      Sign in to CodePro
+                      Sign in to CodeDive
                     </h2>
 
                     <p className="mt-3 text-sm leading-6 text-[#7d8490]">
@@ -193,15 +193,17 @@ const LoginUI = () => {
                   </button>
 
                   {/* Sign Up */}
-                  <p className="mt-7 text-center text-sm text-[#777f8b]">
-
-                    New to CodePro?{" "}
-
-                    <button className="font-semibold text-[#f4e7c5] transition-colors hover:text-[#fff1c9] hover:underline underline-offset-4">
-                      Sign Up
-                    </button>
-
-                  </p>
+{/* Sign Up */}
+<p className="mt-7 text-center text-sm text-[#777f8b]">
+  New to CodeDive?{" "}
+  <button
+    onClick={handleGithubSignIn}
+    disabled={isLoading}
+    className="font-semibold text-[#f4e7c5] transition-colors hover:text-[#fff1c9] hover:underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-60"
+  >
+    Sign Up with GitHub
+  </button>
+</p>
 
                   {/* Self Hosted */}
                   <div className="mt-4 text-center">

@@ -102,6 +102,7 @@ export const connectRepository = async (
           url: `https://github.com/${owner}/${repo}`,
         },
       });
+      await incrementRepositoryCount(session.user.id);
     } else {
       // Completely new repository
       await prisma.repository.create({

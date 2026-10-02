@@ -84,11 +84,12 @@ export async function getDashboardStats() {
             await octokit.rest.users.getAuthenticated();
 
         // Connected repositories in CodeDive
-        const totalRepos = await prisma.repository.count({
-            where: {
-                userId: session.user.id,
-            },
-        });
+const totalRepos = await prisma.repository.count({
+  where: {
+    userId: session.user.id,
+    isConnected: true,
+  },
+});
 
         // Actual commits authored by the GitHub user
         const { data: commits } =

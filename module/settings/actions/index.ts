@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { headers } from "next/headers";
 import {revalidatePath} from "next/cache";
 import { deleteWebhook } from "@/module/github/lib/github";
+import { decrementRepositoryCount } from "@/module/payment/lib/subscription";
 
 export async function getUserProfile() {
   try {
@@ -135,12 +136,15 @@ export async function disconnectRepository(githubId: number) {
 
     await deleteWebhook(repository.owner, repository.name);
 
-    await prisma.repository.delete({
-      where: {
-        id: repository.id,
-      },
-    });
-
+await prisma.repository.update({
+  where: {
+    id: repository.id,
+  },
+  data: {
+    isConnected: false,
+  },
+});
+await decrementRepositoryCount(session.user.id);
     revalidatePath("/dashboard/settings", "page");
     revalidatePath("/dashboard/repository", "page");
 

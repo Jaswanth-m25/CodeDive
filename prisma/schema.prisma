@@ -43,6 +43,7 @@ model Repository{
   fullName String
   url String
   userId String
+  isConnected Boolean @default(true)
   user User @relation(fields: [userId],references:[id],onDelete:Cascade) 
   reviews Review[]
   createdAt DateTime @default(now())

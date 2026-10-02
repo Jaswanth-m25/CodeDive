@@ -118,29 +118,35 @@ export const createWebhook = async (owner: string, repo: string) => {
 };
 
 export const deleteWebhook = async (owner: string, repo: string) => {
-  const token = await getGithubToken();
-  const octokit = new Octokit({ auth: token });
-
-  const webhookUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/webhooks/github`;
-
   try {
+    const token = await getGithubToken();
+    const octokit = new Octokit({ auth: token });
+
     const { data: hooks } = await octokit.rest.repos.listWebhooks({
       owner,
       repo,
     });
 
-    const hookToDelete = hooks.find(
-      (hook) => hook.config.url === webhookUrl
+    // Find CodeDive's GitHub webhook regardless of whether
+    // it uses the old ngrok URL or the current Vercel URL.
+    const hookToDelete = hooks.find((hook) =>
+      hook.config.url?.endsWith("/api/webhooks/github")
     );
-    if(hookToDelete) {
-      await octokit.rest.repos.deleteWebhook({
-        owner,
-        repo,
-        hook_id: hookToDelete.id
-      });
+
+    if (!hookToDelete) {
+      console.log("CodeDive webhook not found");
       return true;
     }
-    return false;
+
+    await octokit.rest.repos.deleteWebhook({
+      owner,
+      repo,
+      hook_id: hookToDelete.id,
+    });
+
+    console.log("CodeDive webhook deleted:", hookToDelete.id);
+
+    return true;
   } catch (error) {
     console.error("Error deleting webhook:", error);
     return false;

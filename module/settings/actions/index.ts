@@ -136,6 +136,15 @@ export async function disconnectRepository(githubId: number) {
 
     await deleteWebhook(repository.owner, repository.name);
 
+const webhookDeleted = await deleteWebhook(
+  repository.owner,
+  repository.name
+);
+
+if (!webhookDeleted) {
+  throw new Error("Failed to delete GitHub webhook");
+}
+
 await prisma.repository.update({
   where: {
     id: repository.id,
@@ -144,6 +153,7 @@ await prisma.repository.update({
     isConnected: false,
   },
 });
+
 await decrementRepositoryCount(session.user.id);
     revalidatePath("/dashboard/settings", "page");
     revalidatePath("/dashboard/repository", "page");

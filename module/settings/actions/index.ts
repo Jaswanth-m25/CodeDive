@@ -84,10 +84,11 @@ export async function getConnectedRepositories() {
       throw new Error("Unauthorized");
     }
 
-    const repositories = await prisma.repository.findMany({
-      where: {
-        userId: session.user.id,
-      },
+const repositories = await prisma.repository.findMany({
+  where: {
+    userId: session.user.id,
+    isConnected: true,
+  },
       select: {
         id: true,
         githubId: true, // ✅ ADD THIS
@@ -125,6 +126,7 @@ export async function disconnectRepository(githubId: number) {
       where: {
         githubId: BigInt(githubId),
         userId: session.user.id,
+        isConnected: true,
       },
     });
 
@@ -134,7 +136,6 @@ export async function disconnectRepository(githubId: number) {
       );
     }
 
-    await deleteWebhook(repository.owner, repository.name);
 
 const webhookDeleted = await deleteWebhook(
   repository.owner,
@@ -168,34 +169,61 @@ await decrementRepositoryCount(session.user.id);
     };
   }
 }
+export async function disconnectAllRepositories() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-export async function disconnectAllRepositories(){
-    try{
-        const session = await auth.api.getSession({
-            headers: await headers(),
-        });
-        if (!session?.user) {
-            throw new Error("Unauthorized");
-        }
-        const repositories = await prisma.repository.findMany({
-            where: {
-                userId: session.user.id,
-            },
-        });
-        await Promise.all(
-            repositories.map(async (repo) => {await deleteWebhook(repo.owner, repo.name)})
-        );
-        const result=await prisma.repository.deleteMany({
-            where: {
-                userId: session.user.id,
-            },
-        });
-        revalidatePath("/dashboard/settings");
-        revalidatePath("/dashboard/repository");
-        return { success: true ,count: result.count};
+    if (!session?.user) {
+      throw new Error("Unauthorized");
     }
-    catch (error) {
-        console.error("Error disconnecting all repositories:", error);
-        return { success: false, error: "Failed to disconnect all repositories" };
-    }
+
+    const repositories = await prisma.repository.findMany({
+      where: {
+        userId: session.user.id,
+        isConnected: true,
+      },
+    });
+
+    await Promise.all(
+      repositories.map(async (repo) => {
+        await deleteWebhook(repo.owner, repo.name);
+      })
+    );
+
+    const result = await prisma.repository.updateMany({
+      where: {
+        userId: session.user.id,
+        isConnected: true,
+      },
+      data: {
+        isConnected: false,
+      },
+    });
+
+    await prisma.userUsage.update({
+      where: {
+        userId: session.user.id,
+      },
+      data: {
+        repositoryCount: 0,
+      },
+    });
+
+    revalidatePath("/dashboard/settings", "page");
+    revalidatePath("/dashboard/repository", "page");
+
+    return {
+      success: true,
+      count: result.count,
+    };
+  } catch (error) {
+    console.error("Error disconnecting all repositories:", error);
+
+    return {
+      success: false,
+      error: "Failed to disconnect all repositories",
+    };
+  }
 }
